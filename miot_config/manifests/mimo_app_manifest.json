@@ -1,0 +1,80 @@
+{
+  "app_id": "econ_paper_writer",
+  "package_name": "com.economics.paperwriting",
+  "version": "1.0.0",
+  "min_api_level": 26,
+  
+  "name": {
+    "zh_CN": "经济学论文写作",
+    "en_US": "Economics Paper Writing"
+  },
+  
+  "description": {
+    "zh_CN": "专为经济学研究者设计的论文写作工具，支持文献管理、数据分析协作和云端同步",
+    "en_US": "A paper writing tool designed for economics researchers with literature management and cloud sync"
+  },
+  
+  "category": "productivity",
+  "subcategory": "research",
+  
+  "permissions": [
+    "com.xiaomi.permission.INTERNET",
+    "com.xiaomi.permission.NOTIFICATION",
+    "com.xiaomi.permission.FILE_STORAGE"
+  ],
+  
+  "screens": [
+    {
+      "id": "main",
+      "type": "tab",
+      "tabs": ["papers", "data", "references", "notes"]
+    },
+    {
+      "id": "paper_editor",
+      "type": "fullscreen"
+    },
+    {
+      "id": "settings",
+      "type": "push"
+    }
+  ],
+  
+  "widgets": [
+    {
+      "widget_id": "recent_papers",
+      "size": "2x2",
+      "description": "最近编辑的论文"
+    },
+    {
+      "widget_id": "writing_progress",
+      "size": "4x1",
+      "description": "写作进度追踪"
+    }
+  ],
+  
+  "automations": [
+    {
+      "trigger": "daily_reminder",
+      "action": "notify_pending_tasks",
+      "time": "09:00"
+    },
+    {
+      "trigger": "git_push",
+      "action": "sync_cloud_backup"
+    }
+  ],
+  
+  "ai_features": {
+    "literature_search": true,
+    "grammar_check": true,
+    "citation_suggestion": true,
+    "data_visualization": true
+  },
+  
+  "data_handling": {
+    "cloud_sync": "xiaomi",
+    "encryption": "AES256",
+    "gdpr_compliant": true,
+    "data_location": "cn"
+  }
+}

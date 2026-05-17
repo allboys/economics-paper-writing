@@ -1,0 +1,69 @@
+{
+  "model": "com.econ.paperwriting.app",
+  "manufacturer": "allboys",
+  
+  "properties": [
+    {
+      "piid": 1,
+      "name": "current_paper",
+      "type": "string",
+      "description": "当前编辑的论文名称"
+    },
+    {
+      "piid": 2,
+      "name": "writing_streak",
+      "type": "int",
+      "description": "连续写作天数"
+    },
+    {
+      "piid": 3,
+      "name": "word_count",
+      "type": "int",
+      "description": "当前论文字数"
+    },
+    {
+      "piid": 4,
+      "name": "sync_status",
+      "type": "enum",
+      "values": ["idle", "syncing", "error"],
+      "description": "同步状态"
+    },
+    {
+      "piid": 5,
+      "name": "last_sync_time",
+      "type": "int",
+      "description": "上次同步时间戳"
+    }
+  ],
+  
+  "actions": [
+    {
+      "aiid": 1,
+      "name": "sync_now",
+      "description": "立即同步"
+    },
+    {
+      "aiid": 2,
+      "name": "export_pdf",
+      "description": "导出PDF"
+    },
+    {
+      "aiid": 3,
+      "name": "backup_data",
+      "description": "备份数据"
+    }
+  ],
+  
+  "events": [
+    {
+      "eiid": 1,
+      "name": "sync_completed",
+      "description": "同步完成"
+    },
+    {
+      "eiid": 2,
+      "name": "writing_reminder",
+      "description": "写作提醒"
+    }
+  ]
+}

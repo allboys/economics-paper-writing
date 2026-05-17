@@ -1,0 +1,56 @@
+{
+  "name": "economics-paper-writing",
+  "type": "application",
+  "version": "1.0.0",
+  "description": "经济学论文写作与研究工具",
+  "category": "productivity",
+  "platform": "MiMo",
+  
+  "developer": {
+    "name": "allboys",
+    "email": "allboys@github.com",
+    "website": "https://github.com/allboys/economics-paper-writing"
+  },
+  
+  "capabilities": {
+    "data_sync": {
+      "enabled": true,
+      "description": "跨设备数据同步",
+      "max_size_mb": 100
+    },
+    "offline_mode": {
+      "enabled": true,
+      "description": "离线访问支持"
+    },
+    "notifications": {
+      "enabled": true,
+      "description": "论文进度提醒"
+    }
+  },
+  
+  "storage": {
+    "local_db": "papers.db",
+    "cache_size_mb": 50,
+    "auto_backup": true
+  },
+  
+  "permissions": [
+    "network.access",
+    "storage.read",
+    "storage.write",
+    "notifications.send"
+  ],
+  
+  "ui": {
+    "theme": "light",
+    "language": "zh-CN",
+    "font_size": "medium"
+  },
+  
+  "integrations": {
+    "git_sync": true,
+    "reference_manager": true,
+    "latex_compiler": false,
+    "cloud_backup": true
+  }
+}
