@@ -1,0 +1,80 @@
+\documentclass[12pt,a4paper]{article}
+
+% 编码设置
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{indentfirst}
+\usepackage{setspace}
+\usepackage{geometry}
+\geometry{margin=1in, top=1in, bottom=1in}
+
+% 数学与符号
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue}
+
+% 双倍行距 (投稿用)
+\doublespacing
+
+% 标题页
+\title{\textbf{[论文标题]}}
+\author{
+[作者姓名]\[1ex]
+[所属机构]\[1ex]
+[邮箱]\[2ex]
+\ today's date}
+\date{}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+% 摘要
+\begin{abstract}
+\noindent 
+[在此处撰写摘要，150-300字。摘要应包含：研究问题、方法、主要发现和结论。]
+
+\textbf{关键词:} [关键词1, 关键词2, 关键词3] (3-5个)
+\end{center}
+
+\newpage
+
+% 1. 引言
+\section{引言}
+\label{sec:intro}
+[intro content]
+
+% 2. 文献综述
+\section{文献综述}
+\label{sec:lit}
+[lit review content]
+
+% 3. 数据与方法
+\section{数据与研究方法}
+\label{sec:data}
+[data and methods content]
+
+% 4. 实证结果
+\section{实证结果}
+\label{sec:results}
+[results content]
+
+% 5. 结论
+\section{结论与政策建议}
+\label{sec:conclusion}
+[conclusion content]
+
+% 参考文献
+\newpage
+\bibliographystyle{plain}
+\bibliography{references}
+
+% 附录
+\newpage
+\appendix
+\section*{附录}
+[appendix content]
+
+\end{document}
