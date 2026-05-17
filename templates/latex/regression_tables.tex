@@ -1,0 +1,338 @@
+# 经济学论文表格模板
+
+> 本文件提供标准经济学论文中各类表格的LaTeX代码
+
+---
+
+## 表1：描述性统计
+
+```latex
+\begin{table}[htbp]
+\centering
+\caption{ Descriptive Statistics}
+\label{tab:desc_stat}
+\scriptsize
+\begin{tabular}{lcccccc}
+\toprule
+Variables & N & Mean & S.D. & Min & Median & Max \\
+\midrule
+Dependent Variable ($Y$) & 1,234 & 5.67 & 2.34 & 0.10 & 5.23 & 12.50 \\
+Independent Variable ($X$) & 1,234 & 3.45 & 1.12 & 1.00 & 3.20 & 6.80 \\
+Control Variable 1 ($Z_1$) & 1,234 & 4.56 & 0.89 & 2.10 & 4.50 & 7.20 \\
+Control Variable 2 ($Z_2$) & 1,234 & 0.68 & 0.47 & 0.00 & 1.00 & 1.00 \\
+Control Variable 3 ($Z_3$) & 1,234 & 2.34 & 1.23 & 0.50 & 2.10 & 5.60 \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{\linewidth}
+\smallskip
+\textit{Notes:} This table reports descriptive statistics for the main variables used in the analysis. All continuous variables are winsorized at the 1st and 99th percentiles. Data sources include the China Family Panel Studies (CFPS) for the period 2010-2020.
+\end{minipage}
+\end{table}
+```
+
+---
+
+## 表2：基准回归结果
+
+```latex
+\begin{table}[htbp]
+\centering
+\caption{Effect of $X$ on $Y$: Baseline Results}
+\label{tab:baseline}
+\scriptsize
+\begin{tabular}{lcccc}
+\toprule
+ & \multicolumn{4}{c}{Dependent Variable: $\ln Y$} \\
+\cmidrule(lr){2-5}
+ & (1) & (2) & (3) & (4) \\
+\midrule
+$X$ (核心解释变量) & 0.123*** & 0.098** & 0.087** & 0.076* \\
+ & (0.032) & (0.041) & (0.045) & (0.048) \\
+$Z_1$ (控制变量1) & & 0.215* & 0.198 & 0.178 \\
+ & & (0.112) & (0.123) & (0.131) \\
+$Z_2$ (控制变量2) & & 0.345*** & 0.312** & 0.298** \\
+ & & (0.089) & (0.096) & (0.102) \\
+$Z_3$ (控制变量3) & & 0.456 & 0.423 & 0.398 \\
+ & & (0.234) & (0.256) & (0.267) \\
+\midrule
+Year FE & No & No & Yes & Yes \\
+Province FE & No & No & No & Yes \\
+\midrule
+Observations & 1,234 & 1,234 & 1,234 & 1,234 \\
+R-squared & 0.123 & 0.245 & 0.389 & 0.456 \\
+Adjusted R-squared & 0.118 & 0.238 & 0.374 & 0.438 \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{\linewidth}
+\smallskip
+\textit{Notes:} This table reports the baseline regression results. Column (1) shows the OLS estimate without any controls or fixed effects. Column (2) adds control variables. Column (3) adds year fixed effects. Column (4) adds both year and province fixed effects. Robust standard errors clustered at the province level are reported in parentheses. ***, **, and * indicate statistical significance at the 1\%, 5\%, and 10\% levels, respectively.
+\end{minipage}
+\end{table}
+```
+
+---
+
+## 表3：稳健性检验
+
+```latex
+\begin{table}[htbp]
+\centering
+\caption{Robustness Checks}
+\label{tab:robust}
+\scriptsize
+\begin{tabular}{lccc}
+\toprule
+ & \multicolumn{3}{c}{Dependent Variable: $\ln Y$} \\
+\cmidrule(lr){2-4}
+ & (1) Alternative Measure & (2) Subsample & (3) Added Controls \\
+\midrule
+$X$ & 0.092** & 0.081* & 0.068* \\
+ & (0.043) & (0.051) & (0.045) \\
+$Z_1$ & 0.203 & 0.189 & 0.201 \\
+ & (0.131) & (0.145) & (0.128) \\
+$Z_2$ & 0.298** & 0.276** & 0.289** \\
+ & (0.104) & (0.112) & (0.098) \\
+$Z_3$ & 0.398 & 0.356 & 0.412 \\
+ & (0.267) & (0.289) & (0.254) \\
+$FDI$ & & & 0.234* \\
+ & & & (0.123) \\
+$Innovation$ & & & 0.167** \\
+ & & & (0.078) \\
+\midrule
+Year FE & Yes & Yes & Yes \\
+Province FE & Yes & Yes & Yes \\
+\midrule
+Observations & 1,123 & 987 & 1,234 \\
+R-squared & 0.445 & 0.432 & 0.478 \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{\linewidth}
+\smallskip
+\textit{Notes:} This table reports robustness check results. Column (1) uses an alternative measure of $X$ (instrumental variable approach). Column (2) restricts the sample to the post-2010 period. Column (3) adds additional control variables (FDI and innovation). Robust standard errors clustered at the province level are in parentheses. *, **, and *** indicate significance at the 10\%, 5\%, and 1\% levels.
+\end{minipage}
+\end{table}
+```
+
+---
+
+## 表4：异质性分析
+
+```latex
+\begin{table}[htbp]
+\centering
+\caption{Heterogeneity Analysis}
+\label{tab:heterogeneity}
+\scriptsize
+\begin{tabular}{lcccc}
+\toprule
+ & \multicolumn{2}{c}{By Region} & \multicolumn{2}{c}{By Income Level} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5}
+ & East & Non-East & High & Low \\
+\midrule
+$X$ & 0.112** & 0.065 & 0.098*** & 0.054 \\
+ & (0.048) & (0.051) & (0.032) & (0.045) \\
+Controls & Yes & Yes & Yes & Yes \\
+Year FE & Yes & Yes & Yes & Yes \\
+Province FE & Yes & Yes & Yes & Yes \\
+\midrule
+Observations & 456 & 778 & 617 & 617 \\
+R-squared & 0.489 & 0.412 & 0.478 & 0.398 \\
+\midrule
+Coefficient Difference & \multicolumn{2}{c}{0.047} & \multicolumn{2}{c}{0.044} \\
+p-value & \multicolumn{2}{c}{0.023**} & \multicolumn{2}{c}{0.045**} \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{\linewidth}
+\smallskip
+\textit{Notes:} This table reports heterogeneity analysis results. Columns (1)-(2) show results separately for eastern and non-eastern provinces. Columns (3)-(4) show results for high and low income groups. The bottom panel reports tests for coefficient differences across groups using the approach suggested by Clogg et al. (1995). Robust standard errors clustered at the province level are in parentheses. *, **, and *** indicate significance at the 10\%, 5\%, and 1\% levels.
+\end{minipage}
+\end{table}
+```
+
+---
+
+## 表5：机制检验
+
+```latex
+\begin{table}[htbp]
+\centering
+\caption{Mechanism Analysis}
+\label{tab:mechanism}
+\scriptsize
+\begin{tabular}{lcc}
+\toprule
+ & \multicolumn{2}{c}{Dependent Variable} \\
+\cmidrule(lr){2-3}
+ & $M$ (Mechanism) & $Y$ (Outcome) \\
+\midrule
+Panel A: Total, Direct, and Indirect Effects \\
+$X$ (Total Effect) & & 0.087** \\
+ & & (0.045) \\
+$X$ (Direct Effect) & & 0.056* \\
+ & & (0.042) \\
+\midrule
+Panel B: Mediation Analysis \\
+$X \rightarrow M$ & 0.123*** & \\
+ & (0.032) & \\
+$M$ & & 0.234** \\
+ & & (0.098) \\
+$X \rightarrow M \rightarrow Y$ (Indirect) & 0.031* & \\
+ & (0.018) & \\
+\midrule
+Proportion Mediated & \multicolumn{2}{c}{35.6\%} \\
+Bootstrap 95\% CI & \multicolumn{2}{c}{[0.12, 0.54]} \\
+\midrule
+Controls & Yes & Yes \\
+Year FE & Yes & Yes \\
+Province FE & Yes & Yes \\
+\midrule
+Observations & 1,234 & 1,234 \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{\linewidth}
+\smallskip
+\textit{Notes:} This table reports mechanism analysis results following Baron and Kenny (1986). Panel A reports total and direct effects of $X$ on $Y$. Panel B shows the mediation pathway. The indirect effect is calculated as the product of coefficients $a \times b$. Bootstrap confidence intervals are based on 1,000 replications. Robust standard errors clustered at the province level are in parentheses. *, **, and *** indicate significance at the 10\%, 5\%, and 1\% levels.
+\end{minipage}
+\end{table}
+```
+
+---
+
+## 表6：变量定义表
+
+```latex
+\begin{table}[htbp]
+\centering
+\caption{Variable Definitions}
+\label{tab:var_def}
+\scriptsize
+\begin{tabular}{lll}
+\toprule
+Variable & Definition & Source \\
+\midrule
+Dependent Variable & & \\
+$Y$ & 家庭人均消费支出（取对数） & CFPS \\
+ & Per capita household consumption (log) & \\
+\midrule
+Independent Variable & & \\
+$X$ & 户主受教育年限 & CFPS \\
+ & Years of education of household head & \\
+\midrule
+Control Variables & & \\
+$Age$ & 户主年龄 & CFPS \\
+ & Age of household head & \\
+$Gender$ & 户主性别（1=男性） & CFPS \\
+ & Gender of household head (1=male) & \\
+$ln\_income$ & 家庭年收入（取对数） & CFPS \\
+ & Annual household income (log) & \\
+$size$ & 家庭人口规模 & CFPS \\
+ & Household size & \\
+$health$ & 家庭健康状况（1=良好） & CFPS \\
+ & Health status (1=good) & \\
+\midrule
+Fixed Effects & & \\
+Year FE & 年份固定效应 & - \\
+ & Year fixed effects & \\
+Province FE & 省份固定效应 & - \\
+ & Province fixed effects & \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{\linewidth}
+\smallskip
+\textit{Notes:} This table provides definitions for all variables used in the analysis. All monetary variables are deflated to 2010 constant prices using the CPI. Data source: China Family Panel Studies (CFPS) 2010-2020.
+\end{minipage}
+\end{table}
+```
+
+---
+
+## 表7：相关性矩阵
+
+```latex
+\begin{table}[htbp]
+\centering
+\caption{Correlation Matrix}
+\label{tab:corr}
+\scriptsize
+\begin{tabular}{lcccc}
+\toprule
+ & $Y$ & $X$ & $Z_1$ & $Z_2$ \\
+\midrule
+$Y$ & 1.000 & & & \\
+$X$ & 0.456*** & 1.000 & & \\
+$Z_1$ & 0.234** & 0.123* & 1.000 & \\
+$Z_2$ & 0.312*** & 0.089 & 0.156** & 1.000 \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{\linewidth}
+\smallskip
+\textit{Notes:} This table reports the correlation matrix for the main variables. ***, **, and * indicate statistical significance at the 1\%, 5\%, and 10\% levels, respectively. All pairwise correlations are reported.
+\end{minipage}
+\end{table}
+```
+
+---
+
+## 表8：平行趋势检验（事件研究法）
+
+```latex
+\begin{table}[htbp]
+\centering
+\caption{Event Study: Pre-trends Analysis}
+\label{tab:pretrend}
+\scriptsize
+\begin{tabular}{lccccccc}
+\toprule
+ & \multicolumn{7}{c}{Years Relative to Policy} \\
+\cmidrule(lr){2-8}
+ & -3 & -2 & -1 & 0 & +1 & +2 & +3 \\
+\midrule
+Treatment Effect & -0.012 & -0.008 & 0.000 & 0.076** & 0.089*** & 0.095*** & 0.112*** \\
+ & (0.023) & (0.018) & (ref) & (0.034) & (0.038) & (0.042) & (0.048) \\
+\midrule
+Observations & 1,234 & 1,234 & 1,234 & 1,234 & 1,234 & 1,234 & 1,234 \\
+R-squared & 0.412 & 0.412 & 0.412 & 0.412 & 0.412 & 0.412 & 0.412 \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{\linewidth}
+\smallskip
+\textit{Notes:} This table reports the event study results for parallel trend testing. The policy implementation year is normalized to 0. The pre-policy period coefficients (years -3 to -1) are not statistically different from zero, confirming the parallel trend assumption. The post-policy coefficients (years 0 to +3) are positive and statistically significant. Robust standard errors clustered at the province level are in parentheses. *, **, and *** indicate significance at the 10\%, 5\%, and 1\% levels.
+\end{minipage}
+\end{table}
+```
+
+---
+
+## 中文期刊表格模板
+
+```latex
+\begin{table}[H]
+\centering
+\caption{基准回归结果}
+\label{tab:baseline_cn}
+\begin{threeparttable}
+\scriptsize
+\begin{tabular}{lccc}
+\toprule
+ & \multicolumn{3}{c}{被解释变量: $Y$} \\
+\cmidrule(lr){2-4}
+ & (1) & (2) & (3) \\
+\midrule
+核心解释变量 $X$ & 0.123^{***} & 0.098^{**} & 0.087^{**} \\
+ & (0.032) & (0.041) & (0.045) \\
+\midrule
+控制变量 & 否 & 是 & 是 \\
+年份固定效应 & 否 & 是 & 是 \\
+省份固定效应 & 否 & 否 & 是 \\
+\midrule
+样本量 & 1,234 & 1,234 & 1,234 \\
+$R^2$ & 0.123 & 0.245 & 0.389 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\smallskip
+\item \textit{注：} 括号内为稳健标准误，$^{***}$、$^{**}$、$^{*}$分别表示1\%、5\%、10\%的显著性水平。
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+```
