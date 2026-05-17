@@ -1,0 +1,290 @@
+\documentclass[UTF8, a4paper, 12pt]{ctexart}
+
+%% ============================================
+%% 中文经济学论文 LaTeX 模板
+%% 适配国内《经济研究》《管理世界》等期刊格式
+%% ============================================
+
+\usepackage[top=2.54cm,bottom=2.54cm,left=3.17cm,right=3.17cm]{geometry}
+\usepackage{setspace}
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+\usepackage{microtype}
+
+% 数学
+\usepackage{amsmath, amssymb}
+\numberwithin{equation}{section}
+
+% 表格与图表
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{float}
+\usepackage{subcaption}
+
+% 交叉引用
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=black, citecolor=black}
+
+% 自定义命令
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\DeclareMathOperator{\plim}{plim}
+\DeclareMathOperator{\argmax}{argmax}
+\DeclareMathOperator{\argmin}{argmin}
+
+% 作者信息
+\title{\textbf{中文标题}\thanks{基金项目支持（项目编号：XXXX）。感谢匿名审稿人的宝贵意见，文责自负。）}}
+\author{
+张三$^{1}$\footnote{通讯作者：zhangsan@edu.cn} \quad 李四$^{2}$ \\
+$^{1}$\textit{北京大学经济学院} \\
+$^{2}$\textit{清华大学经济管理学院}
+}
+\date{}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+% ============================================
+% 摘要
+% ============================================
+\begin{center}
+\textbf{摘\quad 要}
+\end{center}
+\vspace{1ex}
+
+本文研究......利用......数据，采用......方法，实证检验了......。基准回归结果显示，......。异质性分析表明，......。机制检验发现，......。研究结论表明，......
+
+\medskip
+\noindent
+\textbf{关键词：} 研究主题；核心变量；研究方法；政策含义 \\
+\textbf{JEL分类号：} O10; C50; R10
+
+\newpage
+
+% ============================================
+% 1. 引言
+% ============================================
+\section{引言}
+
+\subsection{研究背景与问题}
+[介绍研究背景，引出研究问题]
+
+\subsection{研究意义}
+[从理论和实践两个维度说明研究意义]
+
+\subsection{研究创新}
+[列举本文的主要贡献：]
+\begin{itemize}
+    \item 可能的研究贡献一：从......角度分析......
+    \item 可能的研究贡献二：使用......数据进行实证检验......
+    \item 可能的研究贡献三：揭示了......机制
+\end{itemize}
+
+\subsection{文章结构}
+[说明后续各部分的安排]
+
+% ============================================
+% 2. 文献综述与理论分析
+% ============================================
+\section{文献综述与理论分析}
+
+\subsection{核心概念界定}
+[明确本文涉及的核心概念]
+
+\subsection{理论框架}
+[基于相关理论构建分析框架]
+
+\subsection{文献回顾与评述}
+
+\subsubsection{关于......的研究}
+[回顾相关实证研究，指出其发现和局限]
+
+\subsubsection{关于......的研究}
+[回顾相关实证研究]
+
+\subsection{研究假说}
+[基于理论和文献提出可检验的研究假说：]
+
+\textbf{假说H1：} ......
+
+\textbf{假说H2：} ......
+
+% ============================================
+% 3. 数据与研究设计
+% ============================================
+\section{数据与研究设计}
+
+\subsection{数据来源}
+[说明数据来源、时间范围、样本选择]
+
+\subsection{变量定义}
+[清晰定义被解释变量、解释变量、控制变量]
+
+\begin{table}[H]
+\caption{变量定义表}
+\label{tab:var_def}
+\centering
+\begin{tabular}{cll}
+\toprule
+变量类型 & 变量名称 & 定义说明 \\
+\midrule
+被解释变量 & $Y$ & [定义] \\
+\midrule
+核心解释变量 & $X$ & [定义] \\
+\midrule
+控制变量 & $Z_1$ & [定义] \\
+ & $Z_2$ & [定义] \\
+ & $Z_3$ & [定义] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{描述性统计}
+[报告主要变量的描述性统计量]
+
+\begin{table}[H]
+\caption{描述性统计}
+\label{tab:desc_stat}
+\centering
+\begin{tabular}{lccccc}
+\toprule
+变量 & 观测值 & 均值 & 标准差 & 最小值 & 最大值 \\
+\midrule
+$Y$ & 1,234 & 0.567 & 0.234 & 0 & 1 \\
+$X$ & 1,234 & 4.321 & 1.567 & 0 & 10 \\
+$Z_1$ & 1,234 & 2.345 & 0.876 & 1 & 5 \\
+$Z_2$ & 1,234 & 0.678 & 0.465 & 0 & 1 \\
+$Z_3$ & 1,234 & 0.789 & 0.408 & 0 & 1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{模型设定}
+[设定回归模型]
+
+本文基准回归模型设定如下：
+
+\begin{equation}
+\label{eq:baseline}
+Y_{it} = \alpha + \beta X_{it} + \gamma Z_{it} + \mu_i + \lambda_t + \varepsilon_{it}
+\end{equation}
+
+其中，$i$ 表示地区，$t$ 表示年份。$\mu_i$ 和 $\lambda_t$ 分别为地区和年份固定效应，用于控制不可观察的地区和时间异质性。
+
+% ============================================
+% 4. 实证结果
+% ============================================
+\section{实证结果}
+
+\subsection{基准回归结果}
+[报告基准回归结果]
+
+\begin{table}[H]
+\caption{基准回归结果}
+\label{tab:baseline}
+\centering
+\begin{tabular}{lccc}
+\toprule
+ & \multicolumn{3}{c}{被解释变量 $Y$} \\
+\cmidrule(lr){2-4}
+ & (1) & (2) & (3) \\
+\midrule
+核心解释变量 $X$ & 0.123^{***} & 0.098^{**} & 0.087^{*} \\
+ & (0.032) & (0.041) & (0.045) \\
+\midrule
+控制变量 & 否 & 是 & 是 \\
+地区固定效应 & 否 & 是 & 是 \\
+年份固定效应 & 否 & 否 & 是 \\
+\midrule
+观测值 & 1,234 & 1,234 & 1,234 \\
+$R^2$ & 0.123 & 0.245 & 0.389 \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{\linewidth}
+\smallskip
+\textit{注：} 括号内为稳健标准误，$^{***}$、$^{**}$、$^{*}$分别代表1\%、5\%、10\%的显著性水平。
+\end{minipage}
+\end{table}
+
+\subsection{稳健性检验}
+
+\subsubsection{替换核心变量}
+[使用替代变量进行检验]
+
+\subsubsection{子样本分析}
+[按不同子样本进行分析]
+
+\begin{table}[H]
+\caption{异质性分析结果}
+\label{tab:heterogeneity}
+\centering
+\begin{tabular}{lcc}
+\toprule
+ & \multicolumn{2}{c}{分组样本} \\
+\cmidrule(lr){2-3}
+ & 高$Z$组 & 低$Z$组 \\
+\midrule
+核心解释变量 $X$ & 0.156^{**} & 0.045 \\
+ & (0.062) & (0.038) \\
+\midrule
+观测值 & 617 & 617 \\
+$R^2$ & 0.345 & 0.298 \\
+\midrule
+组间系数差异检验 & \multicolumn{2}{c}{$p$值 = 0.023} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{机制检验}
+[检验可能的作用机制]
+
+% ============================================
+% 5. 结论与启示
+% ============================================
+\section{结论与启示}
+
+\subsection{主要结论}
+[总结本文的主要发现]
+
+\subsection{政策启示}
+[基于研究发现提出政策建议]
+
+\subsection{研究局限}
+[承认研究的局限性]
+
+\subsection{未来研究方向}
+[提出未来可拓展的方向]
+
+% ============================================
+% 参考文献
+% ============================================
+\newpage
+\begin{thebibliography}{99}
+\addtolength{\itemsep}{-1ex}
+
+bibitem{} 张三, 李四. 论文标题[J]. 期刊名称, 2023, 38(1): 1-15.
+
+bibitem{} Author, A. and Author, B. Title of the paper[J]. Journal Name, 2023, 45(2): 123-145.
+
+bibitem{} World Bank. World Development Report 2023[M]. Washington D.C., 2023.
+
+\end{thebibliography}
+
+% ============================================
+% 附录
+% ============================================
+\newpage
+\appendix
+\section*{附录}
+
+\subsection*{表A1：变量描述性统计（续）}
+% [完整的描述性统计]
+
+\subsection*{表A2：稳健性检验——替换核心变量}
+% [额外的稳健性检验]
+
+\end{document}

@@ -1,80 +1,286 @@
-\documentclass[12pt,a4paper]{article}
+\documentclass[a4paper,12pt]{article}
 
-% 编码设置
+%% ============================================
+%% 经济学论文 LaTeX 模板
+%% 基于 AER (American Economic Review) 格式
+%% ============================================
+
+% 页面设置
+\usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
+\usepackage{setspace}
+\doublespacing
+
+% 编码
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{indentfirst}
-\usepackage{setspace}
-\usepackage{geometry}
-\geometry{margin=1in, top=1in, bottom=1in}
+\usepackage{microtype}
 
-% 数学与符号
+% 数学
 \usepackage{amsmath, amssymb, amsthm}
+\numberwithin{equation}{section}
+
+% 表格与图表
 \usepackage{booktabs}
 \usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+
+% 交叉引用
 \usepackage{hyperref}
-\hypersetup{colorlinks=true, linkcolor=blue}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
 
-% 双倍行距 (投稿用)
-\doublespacing
+% 参考文献格式
+\usepackage{natbib}
+\bibliographystyle{aea}
 
-% 标题页
-\title{\textbf{[论文标题]}}
+% 自定义命令
+\usepackage{xargs}
+\usepackage{ifthen}
+
+% 定义实证经济学常用命令
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\text{Var}}
+\newcommand{\Cov}{\text{Cov}}
+\newcommand{\indep}{\perp\!\!\!\perp}
+\DeclareMathOperator{\plim}{plim}
+\DeclareMathOperator{\argmax}{argmax}
+\DeclareMathOperator{\argmin}{argmin}
+
+% 表格小数对齐
+\newcolumntype{d}[1]{D{.}{.}{#1}}
+\newcolumntype{.}{>{\current@color}}
+\usepackage{etoolbox}
+\AtBeginEnvironment{tabular}{\sffamily}
+
+% 论文标题页
+\title{\textbf{[标题]}\\}
 \author{
-[作者姓名]\[1ex]
-[所属机构]\[1ex]
-[邮箱]\[2ex]
-\ today's date}
+\textbf{[作者姓名]}\\[1ex]
+\textit{[机构]}\\[1ex]
+\textit{[邮箱]}\\[2ex]
+\textbf{\today}
+}
 \date{}
 
 \begin{document}
 \maketitle
 \thispagestyle{empty}
 
+% ============================================
 % 摘要
-\begin{abstract}
-\noindent 
-[在此处撰写摘要，150-300字。摘要应包含：研究问题、方法、主要发现和结论。]
-
-\textbf{关键词:} [关键词1, 关键词2, 关键词3] (3-5个)
+% ============================================
+\vspace{-2ex}
+\begin{center}
+\textbf{ABSTRACT}
 \end{center}
+\vspace{-1ex}
+
+\noindent
+[在此处撰写摘要，150-300字。摘要应简洁明了，包含以下要素：]
+
+\begin{itemize}
+    \item \textbf{研究问题}: 本文研究...
+    \item \textbf{方法}: 本文使用...方法，利用...数据...
+    \item \textbf{主要发现}: 研究发现...
+    \item \textbf{结论}: 政策含义是...
+\end{itemize}
+
+\vspace{1ex}
+\noindent
+\textit{Keywords:} [关键词1, 关键词2, 关键词3] \\
+\textit{JEL Classification:} [JEL代码，如：O10, O40, C50]
 
 \newpage
 
+% ============================================
 % 1. 引言
-\section{引言}
+% ============================================
+\section{Introduction}
 \label{sec:intro}
-[intro content]
 
+\subsection{研究背景}
+[描述研究主题的现实背景和重要性]
+
+\subsection{研究问题}
+[明确提出本文要回答的核心问题]
+
+\subsection{研究意义}
+[理论贡献和实践价值]
+
+\subsection{研究创新}
+[本文与现有文献相比的主要创新点]
+
+\subsection{文章结构}
+[简要说明后续各部分内容]
+
+% ============================================
 % 2. 文献综述
-\section{文献综述}
+% ============================================
+\section{Literature Review}
 \label{sec:lit}
-[lit review content]
 
-% 3. 数据与方法
-\section{数据与研究方法}
+\subsection{核心概念界定}
+[定义本文使用的核心概念]
+
+\subsection{理论框架}
+[理论基础和研究假设]
+
+\subsection{相关文献回顾}
+[从以下角度回顾文献：]
+
+\subsubsection{[主题1]}
+[相关研究概述，包括作者(年份)的研究发现]
+
+\subsubsection{[主题2]}
+[相关研究概述]
+
+\subsection{文献评述与研究缺口}
+[总结现有研究的不足，说明本文如何填补]
+
+% ============================================
+% 3. 数据与研究方法
+% ============================================
+\section{Data and Methodology}
 \label{sec:data}
-[data and methods content]
 
+\subsection{数据来源}
+[描述数据来源、时间跨度、样本范围]
+
+\subsection{变量定义}
+[使用表格清晰定义所有变量]
+
+\begin{table}[htbp]
+\caption{变量定义表}
+\label{tab:var_def}
+\centering
+\begin{tabular}{lcl}
+\toprule
+变量名称 & 符号 & 定义 \\
+\midrule
+被解释变量 & $Y_{it}$ & [定义] \\
+解释变量 & $X_{it}$ & [定义] \\
+控制变量 & $Z_{it}$ & [定义] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{描述性统计}
+[报告样本基本特征]
+
+\subsection{模型设定}
+[设定基准回归模型]
+
+\begin{equation}
+\label{eq:baseline}
+Y_{it} = \alpha + \beta X_{it} + \gamma Z_{it} + \mu_i + \lambda_t + \varepsilon_{it}
+\end{equation}
+
+其中，$\mu_i$ 和 $\lambda_t$ 分别表示国家和年份固定效应。
+
+\subsection{识别策略}
+[说明因果识别的假设和策略]
+
+\subsubsection{内生性处理}
+[讨论潜在的内生性来源及处理方法]
+
+\subsubsection{稳健性检验}
+[说明将进行的稳健性检验]
+
+% ============================================
 % 4. 实证结果
-\section{实证结果}
+% ============================================
+\section{Empirical Results}
 \label{sec:results}
-[results content]
 
+\subsection{基准回归}
+[报告基准回归结果]
+
+\begin{table}[htbp]
+\caption{基准回归结果}
+\label{tab:baseline}
+\centering
+\begin{tabular}{lccc}
+\toprule
+ & \multicolumn{3}{c}{被解释变量 $Y$} \\
+\cmidrule(lr){2-4}
+ & (1) & (2) & (3) \\
+\midrule
+解释变量 $X$ & 0.123^{***} & 0.098^{**} & 0.087^{*} \\
+            & (0.032) & (0.041) & (0.045) \\
+控制变量 $Z$ & & 0.215^{*} & 0.198 \\
+            & & (0.112) & (0.123) \\
+\midrule
+固定效应 & 否 & 国家 & 双向 \\
+观测值 & 1,234 & 1,234 & 1,234 \\
+$R^2$ & 0.123 & 0.245 & 0.389 \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{\textwidth}
+\smallskip
+\textit{注:} 括号内为稳健标准误，$^{*}$、$^{**}$、$^{***}$分别表示10\%、5\%、1\%显著性水平。
+\end{minipage}
+\end{table}
+
+\subsection{稳健性检验}
+[报告各种稳健性检验结果]
+
+\subsubsection{替换核心变量}
+[使用替代变量进行检验]
+
+\subsubsection{子样本分析}
+[按不同子样本进行分析]
+
+\subsubsection{工具变量法}
+[处理内生性的结果]
+
+\subsection{异质性分析}
+[按不同群体分析结果的异质性]
+
+% ============================================
 % 5. 结论
-\section{结论与政策建议}
-\label{sec:conclusion}
-[conclusion content]
+% ============================================
+\section{Conclusion}
+\label{sec:concl}
 
+\subsection{主要发现}
+[总结本文主要实证发现]
+
+\subsection{政策建议}
+[基于研究发现提出政策建议]
+
+\subsection{研究局限}
+[承认研究的局限性]
+
+\subsection{未来研究方向}
+[提出未来可拓展的方向]
+
+% ============================================
 % 参考文献
+% =========================================---
 \newpage
-\bibliographystyle{plain}
 \bibliography{references}
 
+% ============================================
 % 附录
+% =========================================---
 \newpage
 \appendix
 \section*{附录}
-[appendix content]
+
+\subsection{表A1：变量描述性统计}
+% [完整的描述性统计表]
+
+\subsection{表A2：稳健性检验结果}
+% [额外的稳健性检验]
+
+\subsection{表A3：工具变量检验}
+% [IV相关检验结果]
 
 \end{document}
