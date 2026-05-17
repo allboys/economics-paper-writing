@@ -1,69 +1,452 @@
 {
-  "model": "com.econ.paperwriting.app",
-  "manufacturer": "allboys",
-  
+  "_comment": "经济学论文写作助手 - 设备模型定义 v1.0.0",
+  "_description": "MiMo IoT 设备模型，用于与小爱同学等设备联动",
+
+  "model": {
+    "device_model_id": "com.econ.paperwriting.app",
+    "manufacturer": "Allboys Studio",
+    "brand": "custom",
+    "name": {
+      "zh_CN": "经济学论文写作助手",
+      "en_US": "Economics Paper Writing Assistant"
+    },
+    "type": "virtual_device",
+    "category": "smart_home",
+    "sub_category": "education"
+  },
+
+  "version": {
+    "protocol_version": "1.1",
+    "firmware_version": "1.0.0",
+    "hardware_version": "1.0"
+  },
+
   "properties": [
     {
       "piid": 1,
       "name": "current_paper",
       "type": "string",
-      "description": "当前编辑的论文名称"
+      "description": {
+        "zh_CN": "当前正在编辑的论文名称",
+        "en_US": "Name of the paper currently being edited"
+      },
+      "value_range": null,
+      "access": ["read", "write"],
+      "default": null,
+      "unit": null
     },
     {
       "piid": 2,
       "name": "writing_streak",
       "type": "int",
-      "description": "连续写作天数"
+      "description": {
+        "zh_CN": "连续写作天数",
+        "en_US": "Number of consecutive days writing"
+      },
+      "value_range": {"min": 0, "max": 365},
+      "access": ["read"],
+      "default": 0,
+      "unit": "days"
     },
     {
       "piid": 3,
-      "name": "word_count",
+      "name": "today_word_count",
       "type": "int",
-      "description": "当前论文字数"
+      "description": {
+        "zh_CN": "今日字数",
+        "en_US": "Words written today"
+      },
+      "value_range": {"min": 0, "max": 100000},
+      "access": ["read"],
+      "default": 0,
+      "unit": "words"
     },
     {
       "piid": 4,
-      "name": "sync_status",
-      "type": "enum",
-      "values": ["idle", "syncing", "error"],
-      "description": "同步状态"
+      "name": "total_papers",
+      "type": "int",
+      "description": {
+        "zh_CN": "论文总数",
+        "en_US": "Total number of papers"
+      },
+      "value_range": {"min": 0, "max": 1000},
+      "access": ["read"],
+      "default": 0,
+      "unit": null
     },
     {
       "piid": 5,
-      "name": "last_sync_time",
+      "name": "sync_status",
+      "type": "string",
+      "description": {
+        "zh_CN": "同步状态",
+        "en_US": "Cloud sync status"
+      },
+      "value_range": {"values": ["idle", "syncing", "completed", "error"]},
+      "access": ["read", "notify"],
+      "default": "idle"
+    },
+    {
+      "piid": 6,
+      "name": "last_sync_timestamp",
       "type": "int",
-      "description": "上次同步时间戳"
+      "description": {
+        "zh_CN": "上次同步时间戳",
+        "en_US": "Last sync timestamp"
+      },
+      "value_range": null,
+      "access": ["read"],
+      "default": 0,
+      "unit": "unix_timestamp"
+    },
+    {
+      "piid": 7,
+      "name": "paper_progress",
+      "type": "int",
+      "description": {
+        "zh_CN": "当前论文完成进度",
+        "en_US": "Progress of current paper"
+      },
+      "value_range": {"min": 0, "max": 100},
+      "access": ["read"],
+      "default": 0,
+      "unit": "percent"
+    },
+    {
+      "piid": 8,
+      "name": "ai_suggestions_count",
+      "type": "int",
+      "description": {
+        "zh_CN": "待处理的AI建议数量",
+        "en_US": "Number of pending AI suggestions"
+      },
+      "value_range": {"min": 0, "max": 100},
+      "access": ["read", "notify"],
+      "default": 0,
+      "unit": null
+    },
+    {
+      "piid": 9,
+      "name": "next_reminder_time",
+      "type": "int",
+      "description": {
+        "zh_CN": "下次写作提醒时间",
+        "en_US": "Next writing reminder time"
+      },
+      "value_range": null,
+      "access": ["read", "write"],
+      "default": null,
+      "unit": "unix_timestamp"
+    },
+    {
+      "piid": 10,
+      "name": "writing_mode",
+      "type": "string",
+      "description": {
+        "zh_CN": "当前写作模式",
+        "en_US": "Current writing mode"
+      },
+      "value_range": {"values": ["markdown", "latex", "plain"]},
+      "access": ["read", "write"],
+      "default": "markdown"
+    },
+    {
+      "piid": 11,
+      "name": "reference_count",
+      "type": "int",
+      "description": {
+        "zh_CN": "文献库数量",
+        "en_US": "Number of references in library"
+      },
+      "value_range": {"min": 0, "max": 10000},
+      "access": ["read"],
+      "default": 0,
+      "unit": null
+    },
+    {
+      "piid": 12,
+      "name": "offline_mode_enabled",
+      "type": "bool",
+      "description": {
+        "zh_CN": "是否启用离线模式",
+        "en_US": "Whether offline mode is enabled"
+      },
+      "value_range": null,
+      "access": ["read", "write"],
+      "default": true
     }
   ],
-  
+
   "actions": [
     {
       "aiid": 1,
       "name": "sync_now",
-      "description": "立即同步"
+      "description": {
+        "zh_CN": "立即同步数据到云端",
+        "en_US": "Sync data to cloud immediately"
+      },
+      "inputs": [],
+      "outputs": [
+        {"name": "success", "type": "bool"},
+        {"name": "message", "type": "string"}
+      ]
     },
     {
       "aiid": 2,
       "name": "export_pdf",
-      "description": "导出PDF"
+      "description": {
+        "zh_CN": "导出当前论文为PDF",
+        "en_US": "Export current paper as PDF"
+      },
+      "inputs": [],
+      "outputs": [
+        {"name": "success", "type": "bool"},
+        {"name": "file_path", "type": "string"}
+      ]
     },
     {
       "aiid": 3,
-      "name": "backup_data",
-      "description": "备份数据"
+      "name": "backup_all",
+      "description": {
+        "zh_CN": "备份所有数据到GitHub",
+        "en_US": "Backup all data to GitHub"
+      },
+      "inputs": [
+        {"name": "commit_message", "type": "string", "required": false}
+      ],
+      "outputs": [
+        {"name": "success", "type": "bool"},
+        {"name": "commit_url", "type": "string"}
+      ]
+    },
+    {
+      "aiid": 4,
+      "name": "create_paper",
+      "description": {
+        "zh_CN": "创建新论文",
+        "en_US": "Create a new paper"
+      },
+      "inputs": [
+        {"name": "title", "type": "string", "required": true},
+        {"name": "template", "type": "string", "required": false}
+      ],
+      "outputs": [
+        {"name": "success", "type": "bool"},
+        {"name": "paper_id", "type": "string"}
+      ]
+    },
+    {
+      "aiid": 5,
+      "name": "apply_ai_suggestion",
+      "description": {
+        "zh_CN": "应用AI写作建议",
+        "en_US": "Apply AI writing suggestion"
+      },
+      "inputs": [
+        {"name": "suggestion_id", "type": "string", "required": true},
+        {"name": "apply", "type": "bool", "required": true}
+      ],
+      "outputs": [
+        {"name": "success", "type": "bool"}
+      ]
+    },
+    {
+      "aiid": 6,
+      "name": "search_literature",
+      "description": {
+        "zh_CN": "搜索文献",
+        "en_US": "Search literature"
+      },
+      "inputs": [
+        {"name": "query", "type": "string", "required": true},
+        {"name": "max_results", "type": "int", "required": false}
+      ],
+      "outputs": [
+        {"name": "success", "type": "bool"},
+        {"name": "results", "type": "array"}
+      ]
+    },
+    {
+      "aiid": 7,
+      "name": "set_reminder",
+      "description": {
+        "zh_CN": "设置写作提醒",
+        "en_US": "Set writing reminder"
+      },
+      "inputs": [
+        {"name": "time", "type": "int", "required": true},
+        {"name": "enabled", "type": "bool", "required": true}
+      ],
+      "outputs": [
+        {"name": "success", "type": "bool"}
+      ]
+    },
+    {
+      "aiid": 8,
+      "name": "generate_chart",
+      "description": {
+        "zh_CN": "生成数据图表",
+        "en_US": "Generate data chart"
+      },
+      "inputs": [
+        {"name": "chart_type", "type": "string", "required": true},
+        {"name": "data_source", "type": "string", "required": true}
+      ],
+      "outputs": [
+        {"name": "success", "type": "bool"},
+        {"name": "chart_path", "type": "string"}
+      ]
     }
   ],
-  
+
   "events": [
     {
       "eiid": 1,
       "name": "sync_completed",
-      "description": "同步完成"
+      "description": {
+        "zh_CN": "同步完成事件",
+        "en_US": "Sync completed event"
+      },
+      "parameters": [
+        {"name": "files_synced", "type": "int"},
+        {"name": "timestamp", "type": "int"}
+      ]
     },
     {
       "eiid": 2,
+      "name": "sync_failed",
+      "description": {
+        "zh_CN": "同步失败事件",
+        "en_US": "Sync failed event"
+      },
+      "parameters": [
+        {"name": "error_code", "type": "int"},
+        {"name": "error_message", "type": "string"}
+      ]
+    },
+    {
+      "eiid": 3,
       "name": "writing_reminder",
-      "description": "写作提醒"
+      "description": {
+        "zh_CN": "写作提醒触发",
+        "en_US": "Writing reminder triggered"
+      },
+      "parameters": [
+        {"name": "message", "type": "string"},
+        {"name": "pending_papers", "type": "int"}
+      ]
+    },
+    {
+      "eiid": 4,
+      "name": "ai_suggestion_ready",
+      "description": {
+        "zh_CN": "AI建议就绪",
+        "en_US": "AI suggestion ready"
+      },
+      "parameters": [
+        {"name": "suggestion_type", "type": "string"},
+        {"name": "paper_id", "type": "string"}
+      ]
+    },
+    {
+      "eiid": 5,
+      "name": "deadline_approaching",
+      "description": {
+        "zh_CN": "截止日期临近",
+        "en_US": "Deadline approaching"
+      },
+      "parameters": [
+        {"name": "paper_title", "type": "string"},
+        {"name": "days_left", "type": "int"}
+      ]
+    },
+    {
+      "eiid": 6,
+      "name": "milestone_reached",
+      "description": {
+        "zh_CN": "达成里程碑",
+        "en_US": "Milestone reached"
+      },
+      "parameters": [
+        {"name": "milestone_type", "type": "string"},
+        {"name": "value", "type": "int"}
+      ]
     }
-  ]
+  ],
+
+  "voice_commands": [
+    {
+      "phrase": "打开论文写作",
+      "action": "open_app",
+      "locale": "zh_CN"
+    },
+    {
+      "phrase": "同步我的论文",
+      "action": "sync_now",
+      "locale": "zh_CN"
+    },
+    {
+      "phrase": "提醒我写作",
+      "action": "set_reminder",
+      "parameters": {"enabled": true},
+      "locale": "zh_CN"
+    },
+    {
+      "phrase": "我写了多少字",
+      "action": "query_today_words",
+      "locale": "zh_CN"
+    },
+    {
+      "phrase": "搜索经济学文献",
+      "action": "search_literature",
+      "parameters": {"field": "economics"},
+      "locale": "zh_CN"
+    }
+  ],
+
+  "scenes": [
+    {
+      "scene_id": "morning_writing",
+      "name": {"zh_CN": "晨间写作", "en_US": "Morning Writing"},
+      "description": {"zh_CN": "每天早晨提醒并打开写作界面", "en_US": "Remind and open writing interface every morning"},
+      "triggers": [
+        {"type": "time", "time": "08:30", "days": [1, 2, 3, 4, 5]}
+      ],
+      "actions": [
+        {"device_id": "self", "action": "open_app"},
+        {"device_id": "speaker", "action": "play_message", "message": "早安！今天的论文要继续加油哦"}
+      ]
+    },
+    {
+      "scene_id": "auto_backup",
+      "name": {"zh_CN": "自动备份", "en_US": "Auto Backup"},
+      "description": {"zh_CN": "每小时自动备份到GitHub", "en_US": "Auto backup to GitHub every hour"},
+      "triggers": [
+        {"type": "time", "interval_hours": 1}
+      ],
+      "actions": [
+        {"device_id": "self", "action": "backup_all"}
+      ]
+    }
+  ],
+
+  "specifications": {
+    "network": {
+      "protocol": "https",
+      "port": 443,
+      "timeout_ms": 30000
+    },
+    "power": {
+      "consumption_ma": 10,
+      "battery_optimized": true
+    },
+    "storage": {
+      "min_free_space_mb": 50,
+      "cache_limit_mb": 200
+    },
+    "performance": {
+      "max_launch_time_ms": 2000,
+      "max_response_time_ms": 500
+    }
+  }
 }

@@ -1,56 +1,359 @@
 {
-  "name": "economics-paper-writing",
-  "type": "application",
-  "version": "1.0.0",
-  "description": "经济学论文写作与研究工具",
-  "category": "productivity",
-  "platform": "MiMo",
-  
-  "developer": {
-    "name": "allboys",
-    "email": "allboys@github.com",
-    "website": "https://github.com/allboys/economics-paper-writing"
-  },
-  
-  "capabilities": {
-    "data_sync": {
-      "enabled": true,
-      "description": "跨设备数据同步",
-      "max_size_mb": 100
+  "_comment": "经济学论文写作助手 - MiMo 应用配置 v1.0.0",
+
+  "app": {
+    "basic": {
+      "app_id": "com.econ.paperwriting",
+      "package_name": "com.econ.paperwriting.mimo",
+      "name": {
+        "zh_CN": "经济学论文写作助手",
+        "en_US": "Economics Paper Writing Assistant",
+        "zh_TW": "經濟學論文寫作助手"
+      },
+      "slogan": {
+        "zh_CN": "让学术写作更高效",
+        "en_US": "Make academic writing more efficient"
+      },
+      "version": {
+        "code": 1,
+        "name": "1.0.0",
+        "min_sdk": 26,
+        "target_sdk": 34
+      },
+      "category": {
+        "primary": "productivity",
+        "secondary": "research_tools",
+        "tags": ["学术", "论文", "写作", "经济学", "研究"]
+      }
     },
-    "offline_mode": {
-      "enabled": true,
-      "description": "离线访问支持"
-    },
-    "notifications": {
-      "enabled": true,
-      "description": "论文进度提醒"
+
+    "description": {
+      "short": {
+        "zh_CN": "专为经济学研究者打造的智能论文写作工具",
+        "en_US": "Intelligent paper writing tool for economics researchers"
+      },
+      "full": {
+        "zh_CN": "经济学论文写作助手是一款面向经济学研究者的专业写作工具，整合了文献管理、数据分析、论文模板、AI智能润色等功能。通过与小米生态深度整合，为用户提供跨设备无缝写作体验。支持一键同步至GitHub版本控制，让学术协作更加便捷。",
+        "en_US": "Economics Paper Writing Assistant is a professional writing tool for economics researchers, integrating literature management, data analysis, paper templates, and AI-powered editing. With deep Xiaomi ecosystem integration, it provides seamless cross-device writing experience."
+      }
     }
   },
-  
+
+  "developer": {
+    "name": "allboys",
+    "display_name": "Allboys Studio",
+    "email": "allboys@github.com",
+    "website": "https://github.com/allboys/economics-paper-writing",
+    "privacy_policy_url": "https://github.com/allboys/economics-paper-writing/blob/main/PRIVACY.md",
+    "terms_of_service_url": "https://github.com/allboys/economics-paper-writing/blob/main/TERMS.md",
+    "support_url": "https://github.com/allboys/economics-paper-writing/issues",
+    "social_links": {
+      "github": "https://github.com/allboys",
+      "email": "allboys@github.com"
+    },
+    "registration": {
+      "registered_country": "China",
+      "registration_number": null
+    }
+  },
+
+  "capabilities": {
+    "core_features": [
+      {
+        "id": "paper_editor",
+        "name": "论文编辑器",
+        "description": "支持 Markdown/LaTeX 双模式写作",
+        "enabled": true,
+        "priority": 1
+      },
+      {
+        "id": "literature_manager",
+        "name": "文献管理器",
+        "description": "Zotero/EndNote 导入，智能文献追踪",
+        "enabled": true,
+        "priority": 2
+      },
+      {
+        "id": "data_analysis",
+        "name": "数据分析",
+        "description": "Stata/Python/R 脚本集成，结果可视化",
+        "enabled": true,
+        "priority": 3
+      },
+      {
+        "id": "template_library",
+        "name": "模板库",
+        "description": "主流期刊论文模板一键使用",
+        "enabled": true,
+        "priority": 4
+      },
+      {
+        "id": "ai_assistant",
+        "name": "AI 助手",
+        "description": "智能润色、语法检查、引用建议",
+        "enabled": true,
+        "priority": 5
+      },
+      {
+        "id": "version_control",
+        "name": "版本控制",
+        "description": "GitHub 深度集成，协作写作",
+        "enabled": true,
+        "priority": 6
+      }
+    ],
+
+    "data_sync": {
+      "enabled": true,
+      "description": "跨设备数据实时同步",
+      "max_file_size_mb": 500,
+      "supported_formats": [".md", ".tex", ".bib", ".dta", ".csv", ".png", ".pdf"],
+      "conflict_resolution": "latest_wins",
+      "sync_interval_seconds": 300,
+      "wifi_only": false,
+      "compression": true
+    },
+
+    "offline_mode": {
+      "enabled": true,
+      "description": "完整离线功能支持",
+      "cached_features": ["editor", "templates", "notes", "drafts"],
+      "sync_on_reconnect": true,
+      "max_offline_days": 30
+    },
+
+    "notifications": {
+      "enabled": true,
+      "types": [
+        {"id": "writing_reminder", "name": "写作提醒", "default_time": "09:00"},
+        {"id": "deadline_alert", "name": "截止日期提醒", "enabled": true},
+        {"id": "sync_status", "name": "同步状态", "enabled": true},
+        {"id": "collaboration", "name": "协作通知", "enabled": true},
+        {"id": "ai_suggestions", "name": "AI 建议", "enabled": true}
+      ]
+    },
+
+    "widgets": [
+      {
+        "widget_id": "recent_papers",
+        "name": "最近论文",
+        "size": "2x2",
+        "description": "显示最近编辑的3篇论文",
+        "refresh_interval": 300
+      },
+      {
+        "widget_id": "writing_stats",
+        "name": "写作统计",
+        "size": "4x1",
+        "description": "今日字数、完成度、连续写作天数"
+      },
+      {
+        "widget_id": "quick_actions",
+        "name": "快捷操作",
+        "size": "2x1",
+        "description": "新建论文、同步、搜索文献"
+      }
+    ]
+  },
+
   "storage": {
-    "local_db": "papers.db",
-    "cache_size_mb": 50,
-    "auto_backup": true
+    "local": {
+      "database": "papers.db",
+      "cache_path": "cache/",
+      "max_cache_size_mb": 200,
+      "auto_cleanup_days": 30
+    },
+    "cloud": {
+      "provider": "xiaomi",
+      "region": "cn",
+      "auto_backup": true,
+      "backup_interval_hours": 6,
+      "max_backup_versions": 10
+    },
+    "encryption": {
+      "algorithm": "AES-256-GCM",
+      "key_derivation": "PBKDF2",
+      "encrypt_local": true,
+      "encrypt_cloud": true
+    }
   },
-  
-  "permissions": [
-    "network.access",
-    "storage.read",
-    "storage.write",
-    "notifications.send"
-  ],
-  
-  "ui": {
-    "theme": "light",
-    "language": "zh-CN",
-    "font_size": "medium"
+
+  "security": {
+    "authentication": {
+      "methods": ["password", "biometric", "xiaomi_account"],
+      "session_timeout_minutes": 30,
+      "max_login_attempts": 5
+    },
+    "authorization": {
+      "rbac": true,
+      "roles": ["owner", "collaborator", "viewer"]
+    },
+    "audit": {
+      "enabled": true,
+      "log_retention_days": 90,
+      "events_logged": ["login", "sync", "share", "delete"]
+    },
+    "compliance": {
+      "gdpr": true,
+      "ccpa": false,
+      "china_dsa": true,
+      "data_localization": true
+    }
   },
-  
+
+  "ui_design": {
+    "theme": {
+      "default": "light",
+      "supported": ["light", "dark", "auto"],
+      "custom_themes": {
+        "academic_blue": {
+          "primary": "#1a73e8",
+          "secondary": "#5f6368",
+          "accent": "#ea4335"
+        }
+      }
+    },
+    "typography": {
+      "font_family": "System Default",
+      "heading_sizes": {"h1": 24, "h2": 20, "h3": 16},
+      "body_size": 14,
+      "line_height": 1.6
+    },
+    "spacing": {
+      "base_unit": 8,
+      "margins": [16, 24, 32],
+      "component_padding": 12
+    },
+    "icons": {
+      "style": "material_design",
+      "sizes": [16, 24, 32, 48],
+      "format": "svg"
+    },
+    "animations": {
+      "enabled": true,
+      "duration_ms": 200,
+      "easing": "ease_in_out"
+    }
+  },
+
+  "ai_features": {
+    "natural_language_processing": {
+      "enabled": true,
+      "capabilities": [
+        "grammar_check",
+        "style_suggestions",
+        "academic_phrase_generation",
+        "translation_assistance"
+      ],
+      "models": {
+        "primary": "xiaomi_mimo_nlp_v2",
+        "fallback": "local_transformer"
+      }
+    },
+    "literature_intelligence": {
+      "enabled": true,
+      "features": [
+        "citation_suggestion",
+        "related_works_finder",
+        "abstract_generation",
+        "keyword_extraction"
+      ]
+    },
+    "data_intelligence": {
+      "enabled": true,
+      "features": [
+        "chart_recommendation",
+        "statistical_test_suggestion",
+        "regression_diagnostics",
+        "data_cleaning_suggestions"
+      ]
+    },
+    "image_generation": {
+      "enabled": false,
+      "planned": true,
+      "features": ["figure_generation", "diagram_creation"]
+    },
+    "api_configuration": {
+      "primary_provider": "xiaomi_ai",
+      "rate_limits": {
+        "requests_per_minute": 60,
+        "requests_per_day": 10000
+      },
+      "fallback_providers": ["openai", "anthropic"]
+    }
+  },
+
   "integrations": {
-    "git_sync": true,
-    "reference_manager": true,
-    "latex_compiler": false,
-    "cloud_backup": true
+    "github": {
+      "enabled": true,
+      "features": ["repo_sync", "issue_tracking", "pull_requests"],
+      "auto_commit": true,
+      "commit_message_template": "[Auto-sync] {timestamp}"
+    },
+    "reference_managers": {
+      "zotero": {"enabled": true, "api_key_required": true},
+      "endnote": {"enabled": true, "format": "enl"},
+      "mendeley": {"enabled": false}
+    },
+    "cloud_storage": {
+      "xiaomi_cloud": {"enabled": true, "primary": true},
+      "google_drive": {"enabled": false},
+      "onedrive": {"enabled": false},
+      "dropbox": {"enabled": false}
+    },
+    "productivity_tools": {
+      "calendar": {"enabled": true, "sync_deadlines": true},
+      "notes": {"enabled": true},
+      "tasks": {"enabled": true}
+    }
+  },
+
+  "analytics": {
+    "enabled": true,
+    "events": [
+      "app_opened",
+      "paper_created",
+      "paper_edited",
+      "sync_completed",
+      "ai_feature_used",
+      "template_used",
+      "export_pdf"
+    ],
+    "privacy": {
+      "anonymous_usage": true,
+      "crash_reports": true,
+      "performance_metrics": true
+    }
+  },
+
+  "monetization": {
+    "model": "freemium",
+    "tiers": {
+      "free": {
+        "storage_mb": 100,
+        "ai_requests_per_day": 50,
+        "collaborators": 1
+      },
+      "premium": {
+        "price_cny": 30,
+        "storage_mb": 2000,
+        "ai_requests_per_day": 500,
+        "collaborators": 10,
+        "features": ["priority_support", "advanced_templates", "custom_ai_models"]
+      }
+    }
+  },
+
+  "testing": {
+    "staging_url": "https://staging.econ.paperwriting.mimo.xiaomi.com",
+    "beta_program_enabled": true,
+    "beta_channels": ["internal", "beta_testers", "public_beta"]
+  },
+
+  "publishing": {
+    "release_channels": ["stable", "beta", "dev"],
+    "auto_update": true,
+    "min_os_version": "Android 8.0",
+    "supported_platforms": ["android", "ios", "web", "miot_device"]
   }
 }
