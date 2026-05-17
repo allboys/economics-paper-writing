@@ -15,18 +15,18 @@ economics-paper-writing/
 └── notes/          # 研究笔记
 ```
 
-## 常用资源
+## 快速开始
 
-- [JEL 分类](https://www.aeaweb.org/jel/jel_class_system.php)
-- [NBER Working Papers](https://www.nber.org/papers)
-- [RePEc Rankings](https://ideas.repec.org/top/)
-- [EconLit 文献库](https://www.aeaweb.org/econlit/)
+1. 使用 `templates/` 中的模板开始写作
+2. 数据分析使用 `scripts/` 中的脚本
+3. 文献管理使用 `references/` 目录
 
-## 开始使用
+## 核心资源
 
-1. 克隆本仓库
-2. 创建你的论文文件夹
-3. 使用 `templates/` 中的模板开始写作
+- [NBER Working Papers](https://www.nber.org/papers) - 美国经济研究局工作论文
+- [JEL 分类](https://www.aeaweb.org/jel/jel_class_system.php) - 经济学文献分类
+- [RePEc 排名](https://ideas.repec.org/top/) - 经济学机构和学者排名
+- [EconLit](https://www.aeaweb.org/econlit/) - 经济学文献数据库
 
 ---
-*Built for academic research and paper writing*
+*Academic research and paper writing*
