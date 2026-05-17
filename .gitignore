@@ -1,0 +1,18 @@
+# Data
+*.dta
+*.csv
+*.xlsx
+
+# Figures
+*.pdf
+*.png
+
+# OS
+.DS_Store
+Thumbs.db
+
+# LaTeX
+*.aux
+*.log
+*.bbl
+*.blg
